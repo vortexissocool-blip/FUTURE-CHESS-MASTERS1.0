@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Future Chess Masters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#f6f3ea; --surface:#ffffff; --ink:#14213d; --muted:#4a5672; --gold:#b8861b; --gold-strong:#8a6210;
+  --navy:#14213d; --on-navy:#f6f3ea; --line:#d8d2c0;
+  --sq-light:#ece5d0; --sq-dark:#14213d;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c1427; --surface:#14213d; --ink:#f3efe2; --muted:#b4bdd1; --gold:#e3b341; --gold-strong:#f0c45a;
+    --navy:#14213d; --on-navy:#f3efe2; --line:#2a3a5f; --sq-light:#e3d9bb; --sq-dark:#1b2c52;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0c1427; --surface:#14213d; --ink:#f3efe2; --muted:#b4bdd1; --gold:#e3b341; --gold-strong:#f0c45a;
+  --navy:#14213d; --on-navy:#f3efe2; --line:#2a3a5f; --sq-light:#e3d9bb; --sq-dark:#1b2c52;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "Work Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
+
+header.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-family:"Fraunces",Georgia,serif;font-weight:800;font-size:1.15rem}
+.brand svg{width:40px;height:40px}
+nav{display:flex;gap:1.25rem;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+.hero{padding:3rem 0 0}
+.hero h1{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:800;max-width:11em;letter-spacing:-.02em}
+.hero p.lead{font-size:1.25rem;color:var(--muted);max-width:34em;margin:1.25rem 0 2rem}
+.btn{display:inline-block;background:var(--gold);color:#14213d;font-weight:600;text-decoration:none;padding:.9rem 1.6rem;border-radius:6px;border:2px solid var(--gold)}
+.btn:hover{background:var(--gold-strong);border-color:var(--gold-strong)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);margin-left:.5rem}
+.btn.ghost:hover{border-color:var(--gold);background:transparent}
+
+/* The one memorable thing: a board strip that the page stands on */
+.board{display:grid;grid-template-columns:repeat(16,1fr);margin-top:3.5rem;border-block:3px solid var(--gold)}
+.board i{aspect-ratio:1;background:var(--sq-light)}
+.board i:nth-child(odd){background:var(--sq-dark)}
+.board i:nth-child(n+17){display:none}
+.board.two{grid-template-columns:repeat(16,1fr)}
+@media(max-width:640px){.board{grid-template-columns:repeat(8,1fr)}.board i:nth-child(n+9){display:none}}
+
+section{padding:4.5rem 0}
+section h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-bottom:1rem}
+.intro{max-width:38em;color:var(--muted)}
+
+.grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:2rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.75rem}
+.panel h3{font-size:1.5rem;margin-bottom:.5rem}
+.price{font-family:"Fraunces",Georgia,serif;font-weight:800;font-size:2.6rem;color:var(--gold-strong);line-height:1}
+.panel.free{background:var(--navy);color:var(--on-navy);border-color:var(--gold)}
+.panel.free .price{color:var(--gold)}
+.panel p{margin:.75rem 0 0;color:var(--muted)}
+.panel.free p{color:var(--on-navy);opacity:.85}
+
+.contact{background:var(--navy);color:var(--on-navy)}
+.contact h2{color:var(--on-navy)}
+.contact p{max-width:36em;opacity:.9}
+.contact .phone{display:inline-block;margin-top:1rem;font-family:"Fraunces",Georgia,serif;font-weight:800;font-size:clamp(2rem,6vw,3.2rem);color:var(--gold);text-decoration:none}
+footer{padding:1.5rem 0;color:var(--muted);font-size:.95rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" aria-label="Future Chess Masters home">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#14213d" stroke="#e3b341" stroke-width="3"/>
+        <path d="M20 22l4 5 8-8 8 8 4-5-2 10H22z" fill="#e3b341"/>
+        <circle cx="32" cy="36" r="5.5" fill="#e3b341"/>
+        <path d="M28 40h8l2 8h4v4H22v-4h4z" fill="#e3b341"/>
+      </svg>
+      Future Chess Masters
+    </a>
+    <nav aria-label="Main">
+      <a href="#lessons">Lessons</a>
+      <a href="#about">About</a>
+      <a href="#book">Book</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>Chess mastery made simple.</h1>
+      <p class="lead">One-on-one chess lessons from a 1800+ rated player who has 10+ years of experience with a love for the game and has been coached by a National Master.</p>
+      <a class="btn" href="#book">Book your free first lesson</a>
+      <a class="btn ghost" href="#lessons">See lesson details</a>
+      <div class="board" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+
+    <section id="lessons">
+      <h2>Lessons</h2>
+      <p class="intro">Every lesson is one hour, in person, with a coach who has 10+ and teaches the game.</p>
+      <div class="grid">
+        <div class="panel free">
+          <h3>First lesson</h3>
+          <div class="price">Free</div>
+          <p>Meet your coach, play a game together, and find out where to start. No commitment.</p>
+        </div>
+        <div class="panel">
+          <h3>Every lesson after</h3>
+          <div class="price">$1,500<span style="font-size:1rem;font-weight:500;color:var(--muted)"> per hour</span></div>
+          <p>Focused coaching, group classes that feel like one-on-one built around your games and your goals.</p>
+        </div>
+        <div class="panel">
+          <h3>Where</h3>
+          <div class="price" style="font-size:1.6rem">Taylor Hall</div>
+          <p>Lessons are held at the Taylor Hall Commuters Lounge.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" style="padding-top:0">
+      <h2>About your coach </h2>
+      <p class="intro">Future Chess Masters was started by a 1800+ rated player who teaches the way he wishes he had been taught: clear ideas, real games, and steady improvement. Whether you are learning how the pieces move or trying to stop losing the same endgames, lessons begin where you are.<img src="devaughn.jpg" alt="Your coach" class="coach-image"></p>
+      
+    </section>
+  </main>
+</div>
+
+<section class="contact" id="book">
+  <div class="wrap">
+    <h2>Book your free first lesson</h2>
+    <p>Call or message to pick a time that works for you.</p>
+    <a class="phone" href="tel:+18765355976">876 535 5976</a>
+  </div>
+</section>
+
+<div class="wrap"><footer>&copy; Future Chess Masters. Chess mastery made simple.</footer></div>
+</body>
+</html>
